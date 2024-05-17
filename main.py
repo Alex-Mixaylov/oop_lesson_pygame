@@ -6,7 +6,9 @@ screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Игра")
 
 image = pygame.image.load("img/appa.png")
-image = image.get_rect()
+image_rect = image.get_rect()
+
+speed = 5
 
 
 
@@ -16,8 +18,24 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.MOUSEMOTION:
+            mouseX, mouseY = pygame.mouse.get_pos()
+            image_rect.x = mouseX - 300
+            image_rect.y = mouseY - 300
+
+    # keys = pygame.key.get_pressed()
+    #
+    # if keys[pygame.K_LEFT]:
+    #     image_rect.x -= speed
+    # if keys[pygame.K_RIGHT]:
+    #     image_rect.x += speed
+    # if keys[pygame.K_UP]:
+    #     image_rect.y -= speed
+    # if keys[pygame.K_DOWN]:
+    #     image_rect.y += speed
 
     screen.fill((0, 0, 0))
+    screen.blit(image, image_rect)
     pygame.display.flip()
 
 pygame.quit()
