@@ -1,3 +1,4 @@
+import time
 import pygame
 pygame.init()
 
@@ -5,8 +6,11 @@ window_size = (800, 600)
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Игра")
 
-image = pygame.image.load("img/appa.png")
-image_rect = image.get_rect()
+image1 = pygame.image.load("img/appa.png")
+image_rect1 = image1.get_rect()
+
+image2 = pygame.image.load("img/aang.png")
+image_rect2 = image2.get_rect()
 
 speed = 5
 
@@ -20,8 +24,11 @@ while run:
             run = False
         if event.type == pygame.MOUSEMOTION:
             mouseX, mouseY = pygame.mouse.get_pos()
-            image_rect.x = mouseX - 300
-            image_rect.y = mouseY - 300
+            image_rect1.x = mouseX - 150
+            image_rect1.y = mouseY - 150
+    if image_rect1.colliderect(image_rect2):
+        print('collide')
+        time.sleep(1)
 
     # keys = pygame.key.get_pressed()
     #
@@ -35,7 +42,8 @@ while run:
     #     image_rect.y += speed
 
     screen.fill((0, 0, 0))
-    screen.blit(image, image_rect)
+    screen.blit(image1, image_rect1)
+    screen.blit(image2, image_rect2)
     pygame.display.flip()
 
 pygame.quit()
